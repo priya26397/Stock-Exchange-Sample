@@ -1,0 +1,111 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Search</mat-card-title>
+        <mat-card-content>
+            <div class="search-container">
+                <form class="" [formGroup]="stockForm">
+
+
+                    <mat-form-field class="ml-3">
+                        <mat-label>Company code</mat-label>
+                        <mat-select formControlName="company">
+                            <mat-option *ngFor="let company of companies" [value]="company">
+                                {{company.code}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="stockForm.get('company').touched && stockForm.get('company').hasError('required')">
+                            Select Company code</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-7">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
+                            <input matStartDate formControlName="start" placeholder="Start date">
+                            <input matEndDate formControlName="end" placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                        <mat-error *ngIf="dateRange.controls.start.hasError('required')">
+                            Enter start date</mat-error>
+                        <mat-error *ngIf="dateRange.controls.end.hasError('required')">
+                            Enter end date</mat-error>
+                        <mat-error *ngIf="dateRange.controls.start.hasError('matStartDateInvalid')">Invalid start date
+                        </mat-error>
+                        <mat-error *ngIf="dateRange.controls.end.hasError('matEndDateInvalid')">Invalid end date
+                        </mat-error>
+
+                    </mat-form-field>
+
+
+
+                    <button class="ml-7" mat-button type="submit" (click)="onSubmit()">Search</button>
+                    <button class="ml-3" mat-button (click)="reset()">Reset</button>
+
+
+                </form>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="container">
+    <mat-card>
+        <mat-card-title>Details</mat-card-title>
+        <mat-card-content>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+
+                    <ng-container matColumnDef="CompanyName">
+                        <th mat-header-cell *matHeaderCellDef> Company Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.companyCode}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="Price">
+                        <th mat-header-cell *matHeaderCellDef> Price </th>
+                        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="DateTime">
+                        <th mat-header-cell *matHeaderCellDef> Date Time </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date | date : 'short'}} </td>
+                    </ng-container>
+
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [hidden]="!dataSource.data.length" [pageSizeOptions]="[5, 10, 20,100,500,1000]" showFirstLastButtons></mat-paginator>
+
+                <table>
+                    <tr *ngIf="!dataSource.data.length">
+                        <td class="lbl-color" style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                            No Records Found!
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="price-container">
+                <div>
+                    <mat-label>Min Price: </mat-label>
+                    <mat-label class="lbl-color">{{min}}</mat-label>
+                </div>
+                <div>
+                    <mat-label>Max Price: </mat-label>
+                    <mat-label class="lbl-color">{{max}}</mat-label>
+                </div>
+                <div>
+                    <mat-label>Avg Price: </mat-label>
+                    <mat-label class="lbl-color">{{avg}}</mat-label>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

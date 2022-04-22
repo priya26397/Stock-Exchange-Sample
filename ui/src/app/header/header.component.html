@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="header">
+    E-Stock Market
+
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav fixedInViewport="true" mode="side" opened class="sidenav" *ngIf="isAuthenticated">
+        <i class="material-icons-round  menu-name">menu</i>
+        <mat-nav-list>
+
+            <a mat-list-item routerLink="" routerLinkActive="active">
+                <i class="material-icons-round">summarize</i> &nbsp; &nbsp; Summary
+            </a>
+            <a mat-list-item routerLink="/viewcompany" routerLinkActive="active">
+                <i class="material-icons-round">business</i> &nbsp; &nbsp; Companies
+            </a>
+            <a mat-list-item routerLink="/stock" routerLinkActive="active">
+                <i class="material-icons-round">inventory_2</i> &nbsp; &nbsp; Stock
+            </a>
+            <a mat-list-item onClick="window.localStorage.clear();window.location.reload();" routerLinkActive="active">
+                <i class="material-icons-round">logout</i> &nbsp; &nbsp; Logout
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,86 @@
+.container {
+    margin: auto;
+    width: 85%;
+    margin-top: 20px;
+}
+
+.search-container {
+    border: solid lightgrey 1px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.mat-header-cell {
+    color: #3f51b5;
+    font-weight: bolder;
+    font-size: 14px;
+    background: lightgrey;
+}
+
+.mat-header-row {
+    height: 40px;
+}
+
+.mat-row {
+    height: 30px;
+}
+
+.mat-column-CompanyName,
+.mat-column-Price,
+.mat-column-DateTime {
+    width: 33.33%
+}
+
+.lbl-color {
+    color: rgba(0, 0, 0, .87);
+    font-weight: normal;
+}
+
+.price-container {
+    border: solid lightgrey 1px;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 10px;
+    display: flex;
+}
+
+.price-container div {
+    width: 33.33%;
+    text-align: center;
+    border-right: solid lightgrey 2px;
+}
+
+mat-card-actions,
+.mat-card-title {
+    text-align: center;
+}
+
+.ml-3 {
+    margin-left: 2%;
+}
+
+.ml-7 {
+    margin-left: 5%;
+}
+
+.mat-card-title {
+    font-weight: bolder;
+    font-size: 16px;
+    color: white;
+    background-color: #3f51b5;
+    line-height: 30px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.mat-card {
+    border: solid lightgrey 1px;
+}
+
+table {
+    width: 100%;
+}
+
+[hidden] {
+    display: none !important;
+}

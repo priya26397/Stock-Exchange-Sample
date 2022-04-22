@@ -1,0 +1,31 @@
+.container {
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.companyForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+mat-card-actions,
+.mat-card-title {
+    text-align: center;
+}
+
+.mat-card-title {
+    font-weight: bolder;
+    font-size: 18px;
+    color: white;
+    background-color: #3f51b5;
+    line-height: 30px;
+}
+
+.mat-card {
+    border: solid lightgrey 1px;
+}
+.mat-form-field{
+    display:  block;
+}

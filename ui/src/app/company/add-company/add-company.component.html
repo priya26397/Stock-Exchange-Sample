@@ -1,0 +1,61 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Add Company</mat-card-title>
+        <mat-card-content>
+            <label class="error-message"></label>
+            <form class="companyForm" [formGroup]="companyForm">
+                <mat-form-field>
+                    <mat-label>Company code</mat-label>
+                    <input matInput class="" formControlName="companyCode" required>
+                    <mat-error *ngIf="companyForm.get('companyCode').touched && companyForm.get('companyCode').hasError('required')">
+                        Enter Company code</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Company name</mat-label>
+                    <input matInput class="" formControlName="companyName" required>
+                    <mat-error *ngIf="companyForm.get('companyName').touched && companyForm.get('companyName').hasError('required')">
+                        Enter Company name</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Company ceo</mat-label>
+                    <input matInput class="" formControlName="ceo" required>
+                    <mat-error *ngIf="companyForm.get('ceo').touched && companyForm.get('ceo').hasError('required')">
+                        Enter CEO name</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Turnover</mat-label>
+                    <input matInput type="number" formControlName="turnOver" required>
+                    <mat-error *ngIf="companyForm.get('turnOver').touched && companyForm.get('turnOver').hasError('required')">
+                        Enter Turnover</mat-error>
+                    <mat-error *ngIf="companyForm.get('turnOver').hasError('min')">
+                        Turnover should be greater than 10000000</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Company website</mat-label>
+                    <input matInput class="" formControlName="website" required>
+                    <mat-error *ngIf="companyForm.get('website').touched && companyForm.get('website').hasError('required')">
+                        Enter Company website</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Stock Exchange</mat-label>
+                    <mat-select required formControlName="stockExchange">
+                        <mat-option *ngFor="let type of stockExchange" [value]="type">
+                            {{type}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="companyForm.get('stockExchange').touched && companyForm.get('stockExchange').hasError('required')">
+                        Select Stock Exchange</mat-error>
+                </mat-form-field>
+                <mat-card-actions>
+                    <button mat-button type="submit" (click)="onSubmit()">Submit</button>
+
+                </mat-card-actions>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

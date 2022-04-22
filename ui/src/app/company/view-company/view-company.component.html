@@ -1,0 +1,50 @@
+<div class="container">
+    <mat-card>
+    	<mat-card-content align="end">
+    	 <button mat-raised-button color="primary" style="border-radius: 20px" routerLink="/company">Add New</button>
+    	</mat-card-content>
+        <mat-card-title>Companies List</mat-card-title>
+        <mat-card-content>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+                    <ng-container matColumnDef="Code">
+                        <th mat-header-cell *matHeaderCellDef> Company Code </th>
+                        <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef> Company Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="Turnover">
+                        <th mat-header-cell *matHeaderCellDef> Turnover </th>
+                        <td mat-cell *matCellDef="let element"> {{element.turnover | currency : 'INR'}} </td>
+                    </ng-container>
+
+                     <ng-container matColumnDef="Price">
+                        <th mat-header-cell *matHeaderCellDef> Stock Price </th>
+                        <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [hidden]="!dataSource.data.length" [pageSizeOptions]="[5, 10, 20,100,500,1000]" showFirstLastButtons></mat-paginator>
+
+                <table>
+                    <tr *ngIf="!dataSource.data.length">
+                        <td class="lbl-color" style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                            No Records Found!
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

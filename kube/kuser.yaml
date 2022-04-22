@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuser
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuser
+  template:
+    metadata:
+      labels:
+        app: kuser
+    spec:
+      containers:
+        - name: user
+          image: vasikaran/fse:user-service
+          ports:
+            - containerPort: 7070
+          env:
+            - name: MYSQL_HOST
+              value: estockmarket.chnbfk4l5n2r.ap-southeast-1.rds.amazonaws.com
+            - name: MYSQL_USERNAME
+              value: estockmarket
+            - name: MYSQL_PASSWORD
+              value: estockmarket
+          imagePullPolicy: Always
+ 
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuser
+spec:
+  selector:
+    app: kuser
+  ports:
+    - port: 7070
+      targetPort: 7070
+  type: LoadBalancer

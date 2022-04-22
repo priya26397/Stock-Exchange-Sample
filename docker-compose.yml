@@ -1,0 +1,91 @@
+version: "3"
+services:
+  mysql-service:
+    image: mysql:5.7
+    networks: 
+      - esmnetwork
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=estockmarket
+
+  mongo-service:
+    image: mongo
+    networks: 
+      - esmnetwork
+    ports:
+      - 27017:27017
+
+  user-service:
+    image: vasikaran/fse:user-service
+    container_name: user-service
+    networks: 
+      - esmnetwork
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "7070:7070"
+    depends_on:
+      - mysql-service
+
+  company-service:
+    image: vasikaran/fse:company-service
+    container_name: company-service
+    networks: 
+      - esmnetwork
+    build:
+      context: ./company
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "7072:7072"
+    depends_on:
+      - mongo-service
+
+  stock-service:
+    image: vasikaran/fse:stock-service
+    container_name: stock-service
+    networks: 
+      - esmnetwork
+    build:
+      context: ./stock
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "7071:7071"
+    depends_on:
+      - mongo-service
+
+  
+  ui-service:
+    image: vasikaran/fse:ui-estockmarket
+    networks: 
+      - esmnetwork
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+  grafana:
+    image: grafana
+    networks: 
+      - esmnetwork
+    build: grafana
+    ports:
+      - '3000:3000'
+
+  prometheus:
+    image: prom/prometheus:v2.6.1
+    networks: 
+      - esmnetwork
+    ports:
+      - '3001:9090'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/prometheus
+
+networks:
+  esmnetwork:
